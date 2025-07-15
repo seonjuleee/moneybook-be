@@ -48,3 +48,6 @@ docker-compose.override.yml
 
 # Optional: PM2 process file
 ecosystem.config.js
+
+# DB
+moneybook.db
