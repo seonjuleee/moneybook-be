@@ -93,3 +93,4 @@ curl http://localhost:3000/expenses/stats/all
 - MVP 버전에서는 로그인/회원가입, 데이터 백업, 음성/OCR 입력 등은 미지원
 - 카테고리 분류는 규칙 기반(추후 AI로 확장 가능)
 - DB 파일(`moneybook.db`)은 프로젝트 루트에 생성됨
+
