@@ -12,7 +12,9 @@ export class ExpenseController {
 
   // 지출 내역 입력
   @Post()
-  async createExpense(@Body() createExpenseDto: CreateExpenseDto): Promise<Expense> {
+  async createExpense(
+    @Body() createExpenseDto: CreateExpenseDto,
+  ): Promise<Expense> {
     return this.expenseService.createExpense(createExpenseDto.text);
   }
 
@@ -36,4 +38,4 @@ export class ExpenseController {
   async getAllStats() {
     return this.expenseService.getAllStats();
   }
-} 
+}
