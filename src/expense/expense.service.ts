@@ -22,6 +22,12 @@ export class ExpenseService {
     // 현재는 간단한 정규식 기반 파싱
     // TODO: AI 기반 파싱으로 개선 예정
 
+    // 여기에 실제 비동기 로직을 넣어야 함
+    // 예: AI API 호출
+
+    // 예시: 비동기 처리 흉내
+    await new Promise((resolve) => setTimeout(resolve, 10)); // 10ms delay
+
     const amountMatch = text.match(/(\d{1,3}(?:,\d{3})*|\d+)원/);
     const amount = amountMatch ? parseInt(amountMatch[1].replace(/,/g, '')) : 0;
 
@@ -58,7 +64,7 @@ export class ExpenseService {
   // 카테고리 자동 분류
   private categorizeExpense(item: string, text: string): ExpenseCategory {
     const lowerText = text.toLowerCase();
-    const lowerItem = item.toLowerCase();
+    // const lowerItem = item.toLowerCase();
 
     // 식비 관련
     if (

@@ -13,4 +13,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
   console.log('🚀 NestJS 서버가 http://localhost:3000 에서 실행 중입니다.');
 }
-bootstrap();
+
+bootstrap().catch((err) => {
+  console.error('Bootstrap failed:', err);
+});
