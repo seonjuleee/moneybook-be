@@ -1,98 +1,95 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Moneybook-BE
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📖 프로젝트 소개
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**Moneybook-BE**는 사용자가 자연어로 지출 내역을 입력하면, AI(규칙 기반 파싱)가 금액, 항목, 날짜, 카테고리를 자동 추출하여 가계부에 저장하고, 리스트 및 통계로 보여주는 백엔드 서비스입니다.
 
-## Description
+- 자연어 입력 예시: `6월 24일 스타벅스에서 6,000원 썼어`
+- 카테고리 자동 분류: 식비, 교통비, 쇼핑 등
+- DB: SQLite (로컬 파일)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🚀 실행 방법
+
+1. **의존성 설치**
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+2. **서버 실행**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+3. **API 테스트**
+
+- cURL 또는 Postman 사용
+- 또는 제공된 스크립트 실행:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+./test-api.sh
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## 🛠️ 주요 API
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. 지출 내역 입력
+- **POST** `/expenses`
+- **Body**: `{ "text": "6월 24일 스타벅스에서 6,000원 썼어" }`
+- **Response**: 저장된 지출 내역 객체
 
+### 2. 지출 내역 전체 조회
+- **GET** `/expenses`
+- **Response**: 최신순 지출 내역 리스트
+
+### 3. 월별 통계 조회
+- **GET** `/expenses/stats?year=2025&month=6`
+- **Response**: 해당 월의 총합, 카테고리별 합계 등
+
+### 4. 전체 통계 조회
+- **GET** `/expenses/stats/all`
+- **Response**: 전체 데이터 기준 통계
+
+---
+
+## 📝 예시
+
+### 지출 입력 예시
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+curl -X POST http://localhost:3000/expenses \
+  -H "Content-Type: application/json" \
+  -d '{"text": "6월 24일 스타벅스에서 6,000원 썼어"}'
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 지출 리스트 조회
+```bash
+curl http://localhost:3000/expenses
+```
 
-## Resources
+### 월별 통계 조회
+```bash
+curl http://localhost:3000/expenses/stats?year=2025&month=6
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 전체 통계 조회
+```bash
+curl http://localhost:3000/expenses/stats/all
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## ⚙️ 기술스택
+- Node.js (NestJS)
+- TypeORM
+- SQLite
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 📌 참고사항
+- MVP 버전에서는 로그인/회원가입, 데이터 백업, 음성/OCR 입력 등은 미지원
+- 카테고리 분류는 규칙 기반(추후 AI로 확장 가능)
+- DB 파일(`moneybook.db`)은 프로젝트 루트에 생성됨
