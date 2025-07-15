@@ -1,4 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from 'typeorm';
 
 export enum ExpenseCategory {
   FOOD = '식비',
@@ -8,7 +13,7 @@ export enum ExpenseCategory {
   MEDICAL = '의료비',
   EDUCATION = '교육비',
   UTILITY = '공과금',
-  OTHER = '기타'
+  OTHER = '기타',
 }
 
 @Entity()
@@ -30,10 +35,10 @@ export class Expense {
 
   @Column({
     type: 'varchar',
-    default: ExpenseCategory.OTHER
+    default: ExpenseCategory.OTHER,
   })
   category: ExpenseCategory; // 카테고리
 
   @CreateDateColumn()
   createdAt: Date; // 생성일시
-} 
+}

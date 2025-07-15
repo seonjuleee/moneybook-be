@@ -9,4 +9,4 @@ import { Expense } from './expense.entity';
   controllers: [ExpenseController],
   providers: [ExpenseService],
 })
-export class ExpenseModule {} 
+export class ExpenseModule {}
